@@ -19,3 +19,9 @@ add10_list_comp (x) = map (+10) x
 add10_list_rec :: [Integer]  -> [Integer] 
 add10_list_rec [] = []
 add10_list_rec (x:xs) = [x+10] ++ (add10_list_comp xs)
+
+4:
+cubeOdds :: [Integer] -> [Integer]
+cubeOdds [] = []
+cubeOdds [x] = [x*x*x]
+cubeOdds (x:y:xs) = x*x*x : y : cubeOdds xs
