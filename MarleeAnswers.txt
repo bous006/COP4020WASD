@@ -1,0 +1,35 @@
+1) Average3.hs
+
+module Average3 where
+average3 :: (Double, Double, Double) -> Double
+average3 (x, y, z) = (x + y + z) / 3
+
+2)
+  a) 5
+  b)
+      1) illegal; a string cannot be an element of a char
+      2) legal
+      3) illegal; a string cannot be an element of a string
+      4) illegal; a list cannot be an element of a string
+      5) legal
+      6) illegal; a number cannot be an element of a string due to type mismatch
+  c) ([3,4,7,5,8], [3,4,7,5,8])
+
+3) Add10List.hs
+
+module Add10List where
+add10_list_rec :: [Integer] -> [Integer]
+add10_list_comp :: [Integer] -> [Integer]
+
+add10_list_comp [] = []
+add10_list_comp xs = [ x+10 | x <- xs]
+
+add10_list_rec [] = []
+add10_list_rec (x:xs) = x+10 : add10_list_rec xs
+
+4) CubeOdds.hs
+
+module CubeOdds where
+cubeOdds :: [Integer] -> [Integer]
+cubeOdds [] = []
+cubeOdds xs = [if odd x then (x^3) else x | x <- xs]
