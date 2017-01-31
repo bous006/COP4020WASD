@@ -1,0 +1,15 @@
+a)
+Equivalent
+Non-equivalent
+Non-equivalent
+Non-equivalent
+Equivalent
+b)
+Illegal, you can’t cons a character onto the end of a string.
+Legal
+Illegal, you need to use the ++ operator for two lists 
+Illegal, it is trying to cons a list onto another list instead of a character onto the list
+Legal
+Illegal, can’t use different types with cons
+c)
+([3,4,7,5,8],[3,4,7,5,8])
