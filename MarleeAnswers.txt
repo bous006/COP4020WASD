@@ -43,10 +43,8 @@ deleteNth _ _ [] = []
 
 deleteNth n toDelete (x:xs)
   | n == 1 =
-    if toDelete == x
-      then xs
+    if toDelete == x then xs
       else x : (deleteNth 1 toDelete xs)
   | otherwise =
-    if toDelete == x
-      then x : (deleteNth n-1 toDelete xs)
+    if toDelete == x then x : (deleteNth (n-1) toDelete xs)
       else x : (deleteNth n toDelete xs)
