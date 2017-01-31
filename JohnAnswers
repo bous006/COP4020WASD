@@ -1,0 +1,21 @@
+Answers:
+1:
+average3 :: (Double, Double, Double) -> Double
+average3 (x, y, z) = (x + y + z) / 3
+
+2a: 
+5
+2b:
+legal: 5
+illegal: 1, 2, 3, 4, 6
+2c:
+([3,4,7,5,8],[3,4,7,5,8])
+
+
+3a:
+add10_list_comp :: [Integer]  -> [Integer] 
+add10_list_comp (x) = map (+10) x
+3b: 
+add10_list_rec :: [Integer]  -> [Integer] 
+add10_list_rec [] = []
+add10_list_rec (x:xs) = [x+10] ++ (add10_list_comp xs)
