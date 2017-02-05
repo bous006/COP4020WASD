@@ -16,14 +16,13 @@ module ApplyToList where
 import BinaryRelation
 
 applyRel :: (Eq k) => k -> (BinaryRelation k v) -> [v]
-applyRel key ls = [l | (x,l) <- ls, x==key]	
+applyRel key xys = [y | (x,y) <- xys, x==key]	
 
 applyToList :: (Eq k) => [k] -> (BinaryRelation k v) -> [v]
 applyToList _ [] = []
 applyToList [] _ = []
 applyToList [] [] = []
 applyToList (key:keys) xys = applyRel key xys ++ applyToList keys xys
-
 
 
 
