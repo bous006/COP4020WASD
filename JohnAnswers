@@ -1,6 +1,6 @@
-[HW 2]
+HW 2
 
-Question 1:
+[Question 1]:
 type Vector = [Double]
 scale :: Double -> Vector -> Vector
 scale x vs = [x*v| v <- vs]
@@ -11,7 +11,7 @@ dot :: Vector -> Vector -> Double
 dot [] [] = 0
 dot (v1:vs1) (v2:vs2) = v1*v2 + dot vs1 vs2
 
-Question 2:
+[Question 2]:
 module ApplyToList where
 import BinaryRelation
 
@@ -24,10 +24,70 @@ applyToList [] _ = []
 applyToList [] [] = []
 applyToList (key:keys) xys = applyRel key xys ++ applyToList keys xys
 
+[Question 3]:
+module BinaryRelationOps where
+import BinaryRelation
+
+project1 :: (BinaryRelation a b) -> [a]
+project1 xys = [x | (x, y) <- xys]
+
+project2 :: (BinaryRelation a b) -> [b]
+project2 xys = [y | (x, y) <- xys]
+
+select :: ((a, b)-> Bool) -> (BinaryRelation a b) -> (BinaryRelation a b)
+select zs xys = []
+
+compose :: Eq b=> (BinaryRelation a b) -> (BinaryRelation b c) -> (BinaryRelation a c)
+compose rel1 rel2 = [(x1,y2) | (x1, y1) <- rel1, (x2, y2) <- rel2, y1==x2]
+
+[Question 4]:
+
+N/A
+
+[Question 5]:
+module Hep where
+
+hep :: [String] -> [String]
+hep txt
+	|txt == [] = []
+	|t == "you" = "u":hep (tail txt)
+	|t == "are" = "r":hep (tail txt)
+	|t == "your" = "ur":hep (tail txt)
+	|t3 == ["by", "the", "way"] = "btw":hep (drop 3 txt)
+	|t3 == ["for", "your", "information"] = "fyi":hep (drop 3 txt) 
+	|t == "boyfriend" = "bf":hep (tail txt)
+	|t == "girlfriend" = "gf":hep (tail txt)
+	|t3 == ["be", "right", "back"] = "brb":hep (drop 3 txt)
+	|t3 == ["laughing", "out", "loud"] = "lol":hep (drop 3 txt)
+	|t2 == ["see", "you"] = "cya":hep (drop 2 txt)
+	|t2 == ["I", "will"] = "I'll":hep (drop 2 txt)
+	|t == "great" = "gr8":hep (tail txt)
+	|otherwise = t:hep (tail txt)
+    where t = (head txt)
+          t2 = (take 2 txt)
+          t3 = (take 3 txt)
+
+[Question 6]:
+module ListMin where
+
+listMin :: (Ord a) => [a] -> a
+listMin [l] = l
+listMin (l:lst) = min l (listMin lst)
+
+[Question 7]:
+module WhatIndex where
+
+whatIndex :: (Eq a) => a -> [a] -> Integer
+whatIndex sought [] = -1
+whatIndex sought (l:lst)
+	| sought == l = 0
+	| otherwise = if x == -1 then -1 else 1 + x
+	where x = whatIndex sought lst
 
 
 
-[HW 1]
+----------------------------------------------------------------------------------------------------------
+HW 1
 1:
 average3 :: (Double, Double, Double) -> Double
 average3 (x, y, z) = (x + y + z) / 3
