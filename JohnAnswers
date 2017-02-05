@@ -1,4 +1,34 @@
-Answers:
+[HW 2]
+
+Question 1:
+type Vector = [Double]
+scale :: Double -> Vector -> Vector
+scale x vs = [x*v| v <- vs]
+add :: Vector -> Vector -> Vector
+add [] [] = []
+add (v1:vs1) (v2:vs2) = v1+v2:add vs1 vs2
+dot :: Vector -> Vector -> Double
+dot [] [] = 0
+dot (v1:vs1) (v2:vs2) = v1*v2 + dot vs1 vs2
+
+Question 2:
+module ApplyToList where
+import BinaryRelation
+
+applyRel :: (Eq k) => k -> (BinaryRelation k v) -> [v]
+applyRel key ls = [l | (x,l) <- ls, x==key]	
+
+applyToList :: (Eq k) => [k] -> (BinaryRelation k v) -> [v]
+applyToList _ [] = []
+applyToList [] _ = []
+applyToList [] [] = []
+applyToList (key:keys) xys = applyRel key xys ++ applyToList keys xys
+
+
+
+
+
+[HW 1]
 1:
 average3 :: (Double, Double, Double) -> Double
 average3 (x, y, z) = (x + y + z) / 3
