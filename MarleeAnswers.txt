@@ -1,3 +1,28 @@
+HW2
+
+4)
+
+Amount.hs
+
+module Amount where
+data Amount = Zero | One | Two | Three
+
+Rotate.hs
+
+module Rotate where
+import Amount
+rotate :: Amount -> (a,a,a,a) -> (a,a,a,a)
+
+rotate Zero (w, x, y, z) = (w, x, y, z)
+rotate One (w, x, y, z) = (z, w, x, y)
+rotate Two (w, x, y, z) = (y, z, w, x)
+rotate Three (w, x, y, z) = (x, y, z, w)
+
+
+
+
+HW1
+
 1) Average3.hs
 
 module Average3 where
