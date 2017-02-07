@@ -18,7 +18,10 @@ rotate One (w, x, y, z) = (z, w, x, y)
 rotate Two (w, x, y, z) = (y, z, w, x)
 rotate Three (w, x, y, z) = (x, y, z, w)
 
+3c)
 
+select :: ((a,b) -> Bool) -> (BinaryRelation a b) -> (BinaryRelation a b)
+select pred pairs = [(x,y) | (x,y) <- pairs, pred (x,y)]
 
 
 HW1
