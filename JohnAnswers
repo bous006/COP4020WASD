@@ -1,3 +1,43 @@
+HW 3
+
+[Question 1]
+module TotalHeight where
+import WindowLayout
+
+totalHeight:: WindowLayout -> Int
+totalHeight Window {wname=nm, width=w, height=h} = h
+totalHeight (Horizontal(wl)) = getHoriz(wl)
+totalHeight (Vertical(wl)) = getVert(wl)
+
+getHoriz:: [WindowLayout] -> Int
+getHoriz [] = 0
+getHoriz (gh:ghl) = max (totalHeight(gh))(getHoriz(ghl))
+
+getVert:: [WindowLayout] -> Int
+getVert [] = 0
+getVert (gv:gvl) = totalHeight(gv) + getVert(gvl)
+
+[Question 2]
+module SplitScreen where
+import WindowLayout
+
+splitScreen:: String -> WindowLayout -> WindowLayout
+splitScreen name Window {wname=nm, width=w, height=h} 
+    |name == nm = (Horizontal [Window{wname=nm, width=w `div` 2, height=h}, Window{wname=nm, width=w `div` 2, height=h}])
+    |otherwise = Window{wname=nm, width=w, height=h}
+splitScreen name (Horizontal(wl))
+    |wl==[] = (Horizontal(wl))
+    |otherwise = (Horizontal(splitWL name wl))
+splitScreen name (Vertical(wl))
+    |wl==[] = (Vertical(wl))
+    |otherwise = (Vertical(splitWL name wl))
+
+splitWL:: String -> [WindowLayout] -> [WindowLayout]
+splitWL name [w] = (splitScreen name w):[]
+splitWL name (w:wl) = (splitScreen name w):(splitWL name wl)
+
+
+----------------------------------------------------------------------------------------------------------
 HW 2
 
 [Question 1]:
