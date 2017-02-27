@@ -1,3 +1,19 @@
+HW3
+
+module Rank where
+import Data.List
+rank :: (Ord a) => [a] -> [(Int, a)]
+
+-- helper function
+count _ _ [] = []
+count x y (z:zs) = if ((zs == []) || (z == (head zs)))
+  then ((y, z) : (count (x+1) y zs))
+  else ((y, z) : (count 1 (y+x) zs))
+
+-- rank function
+rank [] = []
+rank xs = count 1 1 (sort xs)
+
 HW2
 
 4)
