@@ -1,5 +1,49 @@
 HW3
 
+FreeQBExp.hs
+
+module FreeQBExp where
+import QBExp
+import Data.List
+freeQBExp :: QBExp -> [String]
+
+freeQBExp qbe = nub (help qbe)
+
+help (Varref s) = [s]
+help (Exists s e) = [x | x <- (help e), x /= s]
+help (e `Or` f) = (help e) ++ (help f)
+help (Not e) = (help e) ++ []
+
+
+
+Improve.hs
+
+module Improve where
+import StatementsExpressions
+improve :: Statement -> Statement
+improvexp :: Expression -> Expression
+
+-- main function
+improve (ExpStmt e) = ExpStmt (improvexp e)
+improve (AssignStmt s e) = AssignStmt s (improvexp e)
+improve (IfStmt (VarExp "true") s) = improve s
+improve (IfStmt e s) = IfStmt (improvexp e) (improve s)
+
+-- helper function
+improvexp (VarExp s) = (VarExp s)
+improvexp (NumExp n) = (NumExp n)
+improvexp (BeginExp [] e) = (improvexp e)
+improvexp (BeginExp s e) = (BeginExp(map improve s) (improvexp e))
+improvexp (EqualsExp e1 e2) =
+  if bothVarExpp e1 e2
+  then VarExp "true"
+  else EqualsExp (improvexp e1) (improvexp e2)
+    where bothVarExpp _ _ = False
+
+
+
+Rank.hs
+
 module Rank where
 import Data.List
 rank :: (Ord a) => [a] -> [(Int, a)]
@@ -13,6 +57,10 @@ count x y (z:zs) = if ((zs == []) || (z == (head zs)))
 -- rank function
 rank [] = []
 rank xs = count 1 1 (sort xs)
+
+
+
+
 
 HW2
 
