@@ -1,3 +1,28 @@
+HW4
+
+InfSet.hs
+
+module InfSet where
+
+fromFunc :: (a -> Bool) -> (Set a)
+unionSet :: Set a -> Set a -> Set a
+intersectSet :: Set a -> Set a -> Set a
+inSet :: a -> Set a -> Bool
+complementSet :: Set a -> Set a
+
+data Set a = Set {func :: a -> Bool}
+
+fromFunc f = Set {func = f}
+
+unionSet s1 s2 = Set {func = \x -> func s1 x || func s2 x}
+
+intersectSet s1 s2 = Set {func = \x -> func s1 x && func s2 x}
+
+inSet x s = func s x
+
+complementSet s = Set {func = \x -> not (func s x)}
+
+
 HW3
 
 FreeQBExp.hs
