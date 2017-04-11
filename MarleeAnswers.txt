@@ -1,3 +1,101 @@
+HW5
+
+concat.erl
+
+-module(concat).
+-export([concat/1]).
+-spec concat(Lists :: [[T]]) -> [T].
+
+concat([]) -> [];
+concat([First|Rest]) -> First ++ (concat(Rest)).
+
+
+substaddr.erl
+
+-module(substaddr).
+-include("salesdata.hrl").
+-export([substaddr/3]).
+-import (salesdata, [store/2, group/2]).
+-spec substaddr(salesdata:salesdata(), string(), string()) -> salesdata:salesdata().
+
+substaddr(#store{address = Addr, amounts = Amts}, New, Old) ->
+	if
+		(Addr == Old) -> #store{address = New, amounts = Amts};
+		true -> #store{address = Addr, amounts = Amts}
+	end;
+
+substaddr(#group{gname = Gname, members = Memberlist}, New, Old) -> #group{gname = Gname, members = [substaddr(X, New, Old) || X <- Memberlist]}.
+
+
+count_matching.erl
+
+-module(count_matching).
+-export([count_matching/2]).
+-spec count_matching (fun((T) -> boolean()), list(T)) -> non_neg_integer().
+
+count_matching(Pred, []) -> 0;
+
+count_matching(Pred, [H|T]) ->
+  case (Pred(H)) of
+    true -> 1 + (count_matching(Pred,T));
+    (_) -> (count_matching(Pred,T))
+  end.
+
+
+power.erl
+
+-module(power).
+-export([start/0]).
+
+start() -> spawn(fun server/0).
+
+server() ->
+	receive
+		{Pid, power, N, M} ->
+			Pid ! {answer, math:pow(N,M)}
+	end,
+	server().
+
+
+var.erl
+
+-module (var). 
+-export ([start/1]). 
+
+start(Value) ->
+    spawn(fun() -> loop(Value) end). 
+
+loop(Value) ->
+    receive
+        {assign, NewVal} ->
+            loop(NewVal);
+        {Pid, fetch} ->
+            Pid ! {value, Value}
+    end,
+    loop(Value). 
+
+
+logger.erl
+
+-module (logger).
+-export ([start/0]).
+
+start() ->
+	spawn(fun() -> loop([]) end).
+
+loop(Entries) ->
+	receive
+		{Pid, log, Entry} ->
+			Pid ! {self(), logged},
+			loop([Entry|Entries]);
+		{Pid, fetch} ->
+			Pid ! {self(), log_is, lists:reverse(Entries)}
+	end,
+	loop(Entries).  
+
+
+
+
 HW4
 
 InfSet.hs
