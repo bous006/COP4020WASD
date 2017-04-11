@@ -62,17 +62,17 @@ var.erl
 -module (var). 
 -export ([start/1]). 
 
-start(Value) ->
-    spawn(fun() -> loop(Value) end). 
+start(Val) ->
+    spawn(fun() -> loop(Val) end). 
 
-loop(Value) ->
+loop(Val) ->
     receive
         {assign, NewVal} ->
             loop(NewVal);
         {Pid, fetch} ->
-            Pid ! {value, Value}
+            Pid ! {value, Val}
     end,
-    loop(Value). 
+    loop(Val). 
 
 
 logger.erl
