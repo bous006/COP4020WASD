@@ -1,3 +1,21 @@
+HW 7
+
+4) Java exception handlers scope both dynamically and statically. 
+
+5a) Dynamic
+b) Static
+c) alpaca + 5
+d) Dynamic
+e) compFunc(X, X)         -> true;
+compFunc(_, _)           -> false.
+f) No
+g) Yes
+
+7) X ++ Y is a syntatic sugar for lists:append(X,Y)
+
+
+
+
 HW 3
 
 [Question 1]
